@@ -1,0 +1,9 @@
+# Pinned to the versions verified working on macOS with Python 3.9.
+# sentence-transformers pulls in torch; the first install is large (~2 GB).
+anthropic==0.125.0
+razorpay==2.0.1
+Flask==3.1.3
+flask-cors==6.0.5
+sentence-transformers==5.1.2
+numpy==2.0.2
+requests==2.32.5

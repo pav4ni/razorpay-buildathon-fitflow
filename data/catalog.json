@@ -1,0 +1,716 @@
+[
+  {
+    "id": "P001",
+    "name": "CloudRunner Mesh Running Shoes",
+    "category": "footwear",
+    "price": 2799,
+    "stock": 14,
+    "rating": 4.5,
+    "num_reviews": 312,
+    "description": "Lightweight breathable mesh running shoes with cushioned sole, ideal for daily runs and jogging.",
+    "tags": [
+      "running",
+      "shoes",
+      "men",
+      "lightweight",
+      "cushioned"
+    ],
+    "complementary_ids": [
+      "P002",
+      "P003"
+    ],
+    "subscription_eligible": false,
+    "cost": 1390
+  },
+  {
+    "id": "P002",
+    "name": "AirFlex Moisture-Wicking Socks (3-pack)",
+    "category": "accessories",
+    "price": 349,
+    "stock": 60,
+    "rating": 4.3,
+    "num_reviews": 189,
+    "description": "Breathable moisture-wicking running socks, reduces blisters on long runs.",
+    "tags": [
+      "socks",
+      "running",
+      "accessories"
+    ],
+    "complementary_ids": [
+      "P001",
+      "P004"
+    ],
+    "subscription_eligible": false,
+    "cost": 160
+  },
+  {
+    "id": "P003",
+    "name": "ProGrip Insole Support Pads",
+    "category": "accessories",
+    "price": 499,
+    "stock": 40,
+    "rating": 4.1,
+    "num_reviews": 87,
+    "description": "Extra arch support insoles compatible with most running and training shoes.",
+    "tags": [
+      "insole",
+      "support",
+      "shoes"
+    ],
+    "complementary_ids": [
+      "P001"
+    ],
+    "subscription_eligible": false,
+    "cost": 240
+  },
+  {
+    "id": "P004",
+    "name": "TrailBlazer Trekking Shoes",
+    "category": "footwear",
+    "price": 3999,
+    "stock": 9,
+    "rating": 4.6,
+    "num_reviews": 204,
+    "description": "Rugged outdoor trekking shoes with ankle support and grip sole for uneven terrain.",
+    "tags": [
+      "trekking",
+      "hiking",
+      "outdoor",
+      "shoes"
+    ],
+    "complementary_ids": [
+      "P002",
+      "P005"
+    ],
+    "subscription_eligible": false,
+    "cost": 2020
+  },
+  {
+    "id": "P005",
+    "name": "SummitPack 30L Hiking Backpack",
+    "category": "gear",
+    "price": 2299,
+    "stock": 17,
+    "rating": 4.4,
+    "num_reviews": 121,
+    "description": "30-litre water-resistant hiking backpack with multiple compartments.",
+    "tags": [
+      "backpack",
+      "hiking",
+      "outdoor"
+    ],
+    "complementary_ids": [
+      "P004"
+    ],
+    "subscription_eligible": false,
+    "cost": 1300
+  },
+  {
+    "id": "P006",
+    "name": "FlexFit Men's Training Tee",
+    "category": "apparel",
+    "price": 799,
+    "stock": 55,
+    "rating": 4.2,
+    "num_reviews": 267,
+    "description": "Quick-dry stretch training t-shirt for gym and workouts.",
+    "tags": [
+      "tshirt",
+      "gym",
+      "men",
+      "training"
+    ],
+    "complementary_ids": [
+      "P007",
+      "P008"
+    ],
+    "subscription_eligible": false,
+    "cost": 335
+  },
+  {
+    "id": "P007",
+    "name": "FlexFit Men's Training Shorts",
+    "category": "apparel",
+    "price": 899,
+    "stock": 48,
+    "rating": 4.3,
+    "num_reviews": 198,
+    "description": "Breathable stretch training shorts with zip pocket.",
+    "tags": [
+      "shorts",
+      "gym",
+      "men",
+      "training"
+    ],
+    "complementary_ids": [
+      "P006"
+    ],
+    "subscription_eligible": false,
+    "cost": 350
+  },
+  {
+    "id": "P008",
+    "name": "CoolCore Compression Base Layer",
+    "category": "apparel",
+    "price": 1199,
+    "stock": 30,
+    "rating": 4.0,
+    "num_reviews": 76,
+    "description": "Compression base layer for muscle support during intense training.",
+    "tags": [
+      "compression",
+      "gym",
+      "training"
+    ],
+    "complementary_ids": [
+      "P006"
+    ],
+    "subscription_eligible": false,
+    "cost": 525
+  },
+  {
+    "id": "P009",
+    "name": "PulseFit Women's Leggings",
+    "category": "apparel",
+    "price": 1099,
+    "stock": 42,
+    "rating": 4.6,
+    "num_reviews": 341,
+    "description": "High-waist squat-proof leggings for yoga and training.",
+    "tags": [
+      "leggings",
+      "yoga",
+      "women",
+      "training"
+    ],
+    "complementary_ids": [
+      "P010",
+      "P011"
+    ],
+    "subscription_eligible": false,
+    "cost": 475
+  },
+  {
+    "id": "P010",
+    "name": "PulseFit Women's Sports Bra",
+    "category": "apparel",
+    "price": 899,
+    "stock": 38,
+    "rating": 4.5,
+    "num_reviews": 298,
+    "description": "Medium-impact sports bra with breathable racerback design.",
+    "tags": [
+      "sports bra",
+      "women",
+      "training"
+    ],
+    "complementary_ids": [
+      "P009"
+    ],
+    "subscription_eligible": false,
+    "cost": 390
+  },
+  {
+    "id": "P011",
+    "name": "ZenFlow Yoga Mat (6mm)",
+    "category": "gear",
+    "price": 999,
+    "stock": 33,
+    "rating": 4.4,
+    "num_reviews": 156,
+    "description": "Non-slip 6mm thick yoga mat with carry strap.",
+    "tags": [
+      "yoga",
+      "mat",
+      "gear"
+    ],
+    "complementary_ids": [
+      "P009",
+      "P012"
+    ],
+    "subscription_eligible": false,
+    "cost": 580
+  },
+  {
+    "id": "P012",
+    "name": "ZenFlow Yoga Block Set",
+    "category": "gear",
+    "price": 449,
+    "stock": 50,
+    "rating": 4.2,
+    "num_reviews": 64,
+    "description": "Set of 2 high-density foam yoga blocks for support and stretching.",
+    "tags": [
+      "yoga",
+      "blocks",
+      "gear"
+    ],
+    "complementary_ids": [
+      "P011"
+    ],
+    "subscription_eligible": false,
+    "cost": 255
+  },
+  {
+    "id": "P013",
+    "name": "IronCore Adjustable Dumbbell Set (20kg)",
+    "category": "gear",
+    "price": 4999,
+    "stock": 6,
+    "rating": 4.5,
+    "num_reviews": 92,
+    "description": "Adjustable dumbbell set, 20kg total, ideal for home strength training.",
+    "tags": [
+      "dumbbell",
+      "strength",
+      "home gym"
+    ],
+    "complementary_ids": [
+      "P014"
+    ],
+    "subscription_eligible": false,
+    "cost": 2830
+  },
+  {
+    "id": "P014",
+    "name": "GripMaster Weightlifting Gloves",
+    "category": "accessories",
+    "price": 599,
+    "stock": 45,
+    "rating": 4.1,
+    "num_reviews": 108,
+    "description": "Padded weightlifting gloves with wrist support.",
+    "tags": [
+      "gloves",
+      "gym",
+      "strength"
+    ],
+    "complementary_ids": [
+      "P013"
+    ],
+    "subscription_eligible": false,
+    "cost": 260
+  },
+  {
+    "id": "P015",
+    "name": "PowerBand Resistance Band Set",
+    "category": "gear",
+    "price": 699,
+    "stock": 60,
+    "rating": 4.3,
+    "num_reviews": 143,
+    "description": "Set of 5 resistance bands, varying resistance levels, for home workouts.",
+    "tags": [
+      "resistance bands",
+      "home gym",
+      "training"
+    ],
+    "complementary_ids": [],
+    "subscription_eligible": false,
+    "cost": 415
+  },
+  {
+    "id": "P016",
+    "name": "WhaySource Whey Protein (1kg, Chocolate)",
+    "category": "supplements",
+    "price": 2199,
+    "stock": 25,
+    "rating": 4.4,
+    "num_reviews": 421,
+    "description": "Whey protein concentrate, 24g protein per serving, chocolate flavor.",
+    "tags": [
+      "protein",
+      "supplement",
+      "whey"
+    ],
+    "complementary_ids": [
+      "P017",
+      "P019"
+    ],
+    "subscription_eligible": true,
+    "cost": 1615
+  },
+  {
+    "id": "P017",
+    "name": "ShakeIt Pro Shaker Bottle (700ml)",
+    "category": "accessories",
+    "price": 299,
+    "stock": 80,
+    "rating": 4.2,
+    "num_reviews": 233,
+    "description": "Leak-proof shaker bottle with mixing ball, 700ml capacity.",
+    "tags": [
+      "shaker",
+      "bottle",
+      "supplement"
+    ],
+    "complementary_ids": [
+      "P016"
+    ],
+    "subscription_eligible": false,
+    "cost": 145
+  },
+  {
+    "id": "P018",
+    "name": "WhaySource Whey Protein (1kg, Vanilla)",
+    "category": "supplements",
+    "price": 2199,
+    "stock": 3,
+    "rating": 4.3,
+    "num_reviews": 198,
+    "description": "Whey protein concentrate, 24g protein per serving, vanilla flavor.",
+    "tags": [
+      "protein",
+      "supplement",
+      "whey"
+    ],
+    "complementary_ids": [
+      "P017"
+    ],
+    "subscription_eligible": true,
+    "cost": 1645
+  },
+  {
+    "id": "P019",
+    "name": "AminoBoost BCAA Powder (300g)",
+    "category": "supplements",
+    "price": 1299,
+    "stock": 20,
+    "rating": 4.0,
+    "num_reviews": 87,
+    "description": "BCAA powder for muscle recovery, watermelon flavor.",
+    "tags": [
+      "bcaa",
+      "recovery",
+      "supplement"
+    ],
+    "complementary_ids": [
+      "P016"
+    ],
+    "subscription_eligible": true,
+    "cost": 1015
+  },
+  {
+    "id": "P020",
+    "name": "MultiFuel Daily Multivitamin (60 tabs)",
+    "category": "supplements",
+    "price": 649,
+    "stock": 70,
+    "rating": 4.1,
+    "num_reviews": 156,
+    "description": "Daily multivitamin tablets supporting general fitness and immunity.",
+    "tags": [
+      "multivitamin",
+      "supplement",
+      "daily"
+    ],
+    "complementary_ids": [
+      "P016"
+    ],
+    "subscription_eligible": true,
+    "cost": 475
+  },
+  {
+    "id": "P021",
+    "name": "OmegaCore Fish Oil Capsules (90 caps)",
+    "category": "supplements",
+    "price": 799,
+    "stock": 33,
+    "rating": 4.2,
+    "num_reviews": 71,
+    "description": "Omega-3 fish oil capsules supporting joint and heart health.",
+    "tags": [
+      "omega3",
+      "fish oil",
+      "supplement"
+    ],
+    "complementary_ids": [
+      "P020"
+    ],
+    "subscription_eligible": true,
+    "cost": 615
+  },
+  {
+    "id": "P022",
+    "name": "HydroFlex Sports Water Bottle (1L)",
+    "category": "accessories",
+    "price": 449,
+    "stock": 65,
+    "rating": 4.3,
+    "num_reviews": 189,
+    "description": "Insulated 1L sports water bottle, keeps cold for 12 hours.",
+    "tags": [
+      "water bottle",
+      "hydration",
+      "accessories"
+    ],
+    "complementary_ids": [],
+    "subscription_eligible": false,
+    "cost": 205
+  },
+  {
+    "id": "P023",
+    "name": "PulseTrack Fitness Band",
+    "category": "electronics",
+    "price": 1999,
+    "stock": 22,
+    "rating": 4.0,
+    "num_reviews": 267,
+    "description": "Fitness tracker with heart rate monitor, step counter, sleep tracking.",
+    "tags": [
+      "fitness tracker",
+      "wearable",
+      "electronics"
+    ],
+    "complementary_ids": [
+      "P022"
+    ],
+    "subscription_eligible": false,
+    "cost": 1570
+  },
+  {
+    "id": "P024",
+    "name": "PulseTrack Pro Smartwatch",
+    "category": "electronics",
+    "price": 5499,
+    "stock": 11,
+    "rating": 4.4,
+    "num_reviews": 145,
+    "description": "GPS smartwatch with heart rate, SpO2, and workout modes.",
+    "tags": [
+      "smartwatch",
+      "gps",
+      "electronics"
+    ],
+    "complementary_ids": [
+      "P022"
+    ],
+    "subscription_eligible": false,
+    "cost": 4295
+  },
+  {
+    "id": "P025",
+    "name": "CoreGrip Yoga Gloves",
+    "category": "accessories",
+    "price": 399,
+    "stock": 40,
+    "rating": 3.9,
+    "num_reviews": 42,
+    "description": "Non-slip grip gloves for yoga and pilates.",
+    "tags": [
+      "yoga",
+      "gloves",
+      "accessories"
+    ],
+    "complementary_ids": [
+      "P011"
+    ],
+    "subscription_eligible": false,
+    "cost": 185
+  },
+  {
+    "id": "P026",
+    "name": "FlexFit Women's Training Tee",
+    "category": "apparel",
+    "price": 749,
+    "stock": 44,
+    "rating": 4.2,
+    "num_reviews": 133,
+    "description": "Quick-dry stretch training t-shirt for women, gym and workouts.",
+    "tags": [
+      "tshirt",
+      "gym",
+      "women",
+      "training"
+    ],
+    "complementary_ids": [
+      "P009"
+    ],
+    "subscription_eligible": false,
+    "cost": 330
+  },
+  {
+    "id": "P027",
+    "name": "TrailBlazer Trekking Socks (2-pack)",
+    "category": "accessories",
+    "price": 399,
+    "stock": 50,
+    "rating": 4.1,
+    "num_reviews": 58,
+    "description": "Thick cushioned socks designed for trekking and hiking boots.",
+    "tags": [
+      "socks",
+      "trekking",
+      "hiking"
+    ],
+    "complementary_ids": [
+      "P004"
+    ],
+    "subscription_eligible": false,
+    "cost": 185
+  },
+  {
+    "id": "P028",
+    "name": "CloudRunner Women's Running Shoes",
+    "category": "footwear",
+    "price": 2899,
+    "stock": 18,
+    "rating": 4.5,
+    "num_reviews": 276,
+    "description": "Lightweight breathable running shoes for women with cushioned sole.",
+    "tags": [
+      "running",
+      "shoes",
+      "women",
+      "lightweight"
+    ],
+    "complementary_ids": [
+      "P002",
+      "P009"
+    ],
+    "subscription_eligible": false,
+    "cost": 1595
+  },
+  {
+    "id": "P029",
+    "name": "PowerCore Foam Roller",
+    "category": "gear",
+    "price": 899,
+    "stock": 28,
+    "rating": 4.0,
+    "num_reviews": 63,
+    "description": "High-density foam roller for muscle recovery and myofascial release.",
+    "tags": [
+      "foam roller",
+      "recovery",
+      "gear"
+    ],
+    "complementary_ids": [
+      "P015"
+    ],
+    "subscription_eligible": false,
+    "cost": 500
+  },
+  {
+    "id": "P030",
+    "name": "ThermaFlex Compression Sleeves",
+    "category": "accessories",
+    "price": 549,
+    "stock": 35,
+    "rating": 4.0,
+    "num_reviews": 49,
+    "description": "Calf compression sleeves for recovery during and after runs.",
+    "tags": [
+      "compression",
+      "recovery",
+      "running"
+    ],
+    "complementary_ids": [
+      "P001",
+      "P028"
+    ],
+    "subscription_eligible": false,
+    "cost": 260
+  },
+  {
+    "id": "P031",
+    "name": "GymPro Duffel Bag (45L)",
+    "category": "gear",
+    "price": 1599,
+    "stock": 20,
+    "rating": 4.3,
+    "num_reviews": 91,
+    "description": "45L gym duffel bag with separate shoe compartment.",
+    "tags": [
+      "bag",
+      "gym",
+      "gear"
+    ],
+    "complementary_ids": [
+      "P006",
+      "P007"
+    ],
+    "subscription_eligible": false,
+    "cost": 915
+  },
+  {
+    "id": "P032",
+    "name": "CreaPure Creatine Monohydrate (250g)",
+    "category": "supplements",
+    "price": 899,
+    "stock": 4,
+    "rating": 4.5,
+    "num_reviews": 302,
+    "description": "Pure creatine monohydrate for strength and performance.",
+    "tags": [
+      "creatine",
+      "strength",
+      "supplement"
+    ],
+    "complementary_ids": [
+      "P016",
+      "P017"
+    ],
+    "subscription_eligible": true,
+    "cost": 700
+  },
+  {
+    "id": "P033",
+    "name": "SleepWell Recovery Magnesium (60 caps)",
+    "category": "supplements",
+    "price": 599,
+    "stock": 42,
+    "rating": 4.1,
+    "num_reviews": 55,
+    "description": "Magnesium capsules supporting muscle recovery and sleep quality.",
+    "tags": [
+      "magnesium",
+      "recovery",
+      "sleep",
+      "supplement"
+    ],
+    "complementary_ids": [
+      "P021"
+    ],
+    "subscription_eligible": true,
+    "cost": 440
+  },
+  {
+    "id": "P034",
+    "name": "ActiveStretch Resistance Loop Bands (Set of 5)",
+    "category": "gear",
+    "price": 449,
+    "stock": 55,
+    "rating": 4.2,
+    "num_reviews": 78,
+    "description": "Mini resistance loop bands for glute and mobility activation.",
+    "tags": [
+      "resistance bands",
+      "mobility",
+      "gear"
+    ],
+    "complementary_ids": [
+      "P015"
+    ],
+    "subscription_eligible": false,
+    "cost": 270
+  },
+  {
+    "id": "P035",
+    "name": "CoreFit Ab Roller Wheel",
+    "category": "gear",
+    "price": 549,
+    "stock": 30,
+    "rating": 3.8,
+    "num_reviews": 39,
+    "description": "Ab roller wheel with knee pad for core strength training.",
+    "tags": [
+      "ab roller",
+      "core",
+      "gear"
+    ],
+    "complementary_ids": [],
+    "subscription_eligible": false,
+    "cost": 305
+  }
+]
