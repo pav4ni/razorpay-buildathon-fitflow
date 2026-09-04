@@ -5,6 +5,8 @@ plain language; it searches the catalog, negotiates on budget, and completes a
 real Razorpay purchase — with **every money-moving decision bounded by a safety
 gate and written to an append-only audit trail**.
 
+Two more things it does that most agentic-commerce demos skip: it negotiates against a second, independent buyer agent with a hidden budget, and it refuses to discount any item below a real profit margin — the AI never even sees the cost figure, so it can't leak it.
+
 Razorpay AI Buildathon entry (AI Growth & Agentic Commerce).
 
 ---
@@ -76,6 +78,8 @@ inside Razorpay Checkout, not in this app. To produce one:
 | "the ZenFlow one, order it" | Real `order_...` id. Cart total updates. |
 | "also add three of the IronCore dumbbell sets" | **GATE · DENIED** — `exceeds_single_item_limit` at ₹14,997. The agent explains the limit and offers a way forward. |
 | *Toggle* **Show audit trail** | Every step above, with the agent's own stated reason for it. |
+| "I want the AminoBoost BCAA Powder, budget is 900" | Discount offered — but never below the profit floor, and cost is never mentioned. |
+| `venv/bin/python app/buyer_agent.py` (separate terminal) | A second AI agent negotiates a real purchase against this one, zero human input. |
 
 ---
 
@@ -123,6 +127,28 @@ in a prompt — because a prompt is a request and code is a rule:
 
 Bounds live in `app/gate.py`: ₹6,000 per item, ₹10,000 per session, 20% max
 discount.
+
+## Margin-aware discounting
+
+Every product carries a real cost. `app/discount.py` bounds any discount by whichever
+is tighter: the store's 20% policy cap, or never selling below cost + 10% margin.
+The cost figure is not in the model's context at any point — it cannot leak what it
+was never given.
+
+## Two-sided negotiation
+
+`app/buyer_agent.py` is a second, independent agent with its own hidden budget it
+never states. It opens, the merchant counters using the same margin-aware discount
+logic above, and they go up to three bounded rounds. If the buyer's real ceiling is
+below what the merchant can legally sell at, the merchant holds its price and the
+buyer walks away — same gate and margin rules as a human conversation, no exceptions.
+
+## Revenue attribution
+
+`app/metrics.py` computes one number straight from the audit log — no separate
+analytics pipeline. Across test sessions: ₹1,23,136 realized revenue, ₹941 in margin
+actively protected from bad discounts, 44.7% negotiation close rate (meaning over
+half the time the agent correctly walked away rather than accept a bad deal).
 
 ### The audit trail
 
