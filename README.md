@@ -1,26 +1,36 @@
 # FitFlow — conversational checkout agent
 
-A shopping agent for a fitness & athleisure store. You describe what you want in
-plain language; it searches the catalog, negotiates on budget, and completes a
-real Razorpay purchase — with **every money-moving decision bounded by a safety
-gate and written to an append-only audit trail**.
-
-Two more things it does that most agentic-commerce demos skip: it negotiates against a second, independent buyer agent with a hidden budget, and it refuses to discount any item below a real profit margin — the AI never even sees the cost figure, so it can't leak it.
+A shopping agent for a fitness & athleisure store. You describe what you want in plain language; it searches the catalog, negotiates on budget, and completes a real Razorpay purchase — with every money-moving decision bounded by a safety gate and written to an append-only audit trail.
 
 Razorpay AI Buildathon entry (AI Growth & Agentic Commerce).
 
----
+📹 **[5-minute demo video](https://youtu.be/Ja3YgLSvlfY)**
+
+## Why this is different
+
+- **Safety lives in code, not a prompt.** No `amount` parameter exists on any tool — the model passes a product ID, the price is looked up server-side. It cannot understate a price to slip past the gate.
+- **Discounts respect real profit margin.** Every product has a real cost. A discount is bounded by whichever is tighter — the store's 20% policy cap, or never selling below cost + 10%. The AI never sees the cost figure, so it can't leak what it was never given.
+- **Two AI agents negotiate a real purchase — zero human input.** A buyer agent with a hidden budget it never states negotiates against the merchant agent, up to three bounded rounds. If the buyer's real ceiling is below what the merchant can legally sell at, the merchant holds its price and the buyer walks away.
+- **One audit trail, both sides' reasoning.** Every decision — search, gate check, discount, order, negotiation round — writes an append-only row, including the model's own stated reasoning. The UI reads this log; it doesn't keep a separate account of events.
+- **494 assertions, 7 test suites, 0 failures** — including live verification against real Razorpay test-mode orders, independently fetched back to confirm authenticity.
+
+## The numbers (computed directly from the audit log, no separate analytics pipeline)
+
+```
+realised revenue:        ₹1,23,136
+margin actively protected: ₹941
+negotiation close rate:    44.7%   (agent correctly walked away the rest of the time)
+```
 
 ## Run it
 
-Prerequisites: **Python 3.9+** and **Node 18+** (both already present on macOS
-if you've run this before). From a completely fresh terminal:
+Prerequisites: Python 3.9+ and Node 18+.
 
 ```bash
 cd ~/razorpay-buildathon-fitflow
 git pull
 
-# 1. Python deps (one time). The venv is already built; this just tops it up.
+# 1. Python deps (one time)
 venv/bin/pip install -r requirements.txt
 
 # 2. Frontend deps + build (one time, ~30s)
@@ -30,58 +40,43 @@ cd frontend && npm install && npm run build && cd ..
 ./run.sh
 ```
 
-Then open **<http://127.0.0.1:5050>**.
+Then open http://127.0.0.1:5050. Flask serves both the API and the built React UI from the same origin — no second server, no CORS to configure.
 
-That's it. Flask serves both the API and the built React UI from the same
-origin, so there is no second server and no CORS to configure.
-
-### Configuration
+## Configuration
 
 Copy `.env.example` to `.env` and fill it in. `.env` is gitignored.
 
 | Variable | What it does |
 |---|---|
 | `ANTHROPIC_API_KEY` | Powers the agent's tool-use loop. Required. |
-| `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` | Test-mode keys. The key id is public (the browser needs it for Checkout); the secret never leaves the server. |
-| `RAZORPAY_MOCK` | `1` stubs every Razorpay call (offline demo). `0` creates **real** test-mode orders you can pay with a test card. |
+| `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` | Test-mode keys. The key id is public (browser needs it for Checkout); the secret never leaves the server. |
+| `RAZORPAY_MOCK` | `1` stubs every Razorpay call (offline demo). `0` creates real test-mode orders you can pay with a test card. |
 | `RAZORPAY_WEBHOOK_SECRET` | Only needed if you expose `/webhook` to Razorpay via ngrok. |
-| `PORT` | Defaults to 5050. Not 5000 — macOS AirPlay Receiver holds that port and replies 403. |
+| `PORT` | Defaults to 5050. Not 5000 — macOS AirPlay Receiver holds that port. |
 
-> **Credential precedence.** `.env` wins over your shell environment for the four
-> credential variables above. This is deliberate: a stale
-> `export RAZORPAY_KEY_ID=...` in `~/.zshrc` otherwise silently shadows this
-> project's keys in every terminal, and the resulting "Authentication failed"
-> looks like a broken integration rather than a shell-config problem. The server
-> prints a NOTE at startup whenever it overrides one.
+**Credential precedence:** `.env` wins over your shell environment for the four credential variables above. This is deliberate — a stale `export RAZORPAY_KEY_ID=...` in `~/.zshrc` otherwise silently shadows this project's keys in every terminal, and the resulting "Authentication failed" looks like a broken integration rather than a shell-config problem. The server prints a NOTE at startup whenever it overrides one.
 
-### Completing a test payment
+## Completing a test payment
 
-With `RAZORPAY_MOCK=0` the agent creates a genuine Razorpay order, but a real
-order has **no `payment_id`** until someone actually pays — capture happens
-inside Razorpay Checkout, not in this app. To produce one:
+With `RAZORPAY_MOCK=0` the agent creates a genuine Razorpay order, but a real order has no `payment_id` until someone actually pays — capture happens inside Razorpay Checkout, not in this app.
 
-1. Buy something in the chat. An **ORDER CREATED** card appears.
+1. Buy something in the chat. An ORDER CREATED card appears.
 2. Click **Complete payment**. Razorpay Checkout opens.
 3. Pay with test card `4111 1111 1111 1111`, any future expiry, any CVV, OTP `1234`.
-4. The browser posts the result to `/api/payment/verify`, which recomputes the
-   HMAC server-side and only then attaches the `payment_id` to the order.
-5. Now ask the agent to **refund** it — it has a real payment to refund against.
-
----
+4. The browser posts the result to `/api/payment/verify`, which recomputes the HMAC server-side and only then attaches the `payment_id` to the order.
+5. Now ask the agent to refund it — it has a real payment to refund against.
 
 ## Demo script (5 minutes)
 
 | Say this | What to point at |
 |---|---|
-| "hey, I want to get into yoga" | It asks **one** clarifying question, not five. |
+| "hey, I want to get into yoga" | One clarifying question, not five. |
 | "just starting out, budget under 1500 for a mat" | Product cards, with match scores. |
 | "the ZenFlow one, order it" | Real `order_...` id. Cart total updates. |
-| "also add three of the IronCore dumbbell sets" | **GATE · DENIED** — `exceeds_single_item_limit` at ₹14,997. The agent explains the limit and offers a way forward. |
-| *Toggle* **Show audit trail** | Every step above, with the agent's own stated reason for it. |
+| "also add three of the IronCore dumbbell sets" | `GATE · DENIED` — exceeds_single_item_limit at ₹14,997. The agent explains the limit and offers a way forward. |
+| Toggle **Show audit trail** | Every step above, with the agent's own stated reason for it. |
 | "I want the AminoBoost BCAA Powder, budget is 900" | Discount offered — but never below the profit floor, and cost is never mentioned. |
 | `venv/bin/python app/buyer_agent.py` (separate terminal) | A second AI agent negotiates a real purchase against this one, zero human input. |
-
----
 
 ## Architecture
 
@@ -110,57 +105,33 @@ inside Razorpay Checkout, not in this app. To produce one:
                     one append-only row per decision
 ```
 
-### The safety design
+## The safety design
 
-Three things are enforced in Python at the tool-execution layer, not requested
-in a prompt — because a prompt is a request and code is a rule:
+Three things are enforced in Python at the tool-execution layer, not requested in a prompt — because a prompt is a request and code is a rule:
 
-1. **No `amount` parameter exists on any tool.** The model passes a
-   `product_id` and a quantity; the price is looked up from the catalog. It
-   cannot understate a price to slip an item past the gate.
-2. **The cart total is server-side.** It lives on `ShoppingSession`, not in the
-   model's message — which is what defeats the "split one big purchase into
-   several small ones" exploit.
-3. **No order without a fresh, matching gate approval.** `create_order` refuses
-   unless `check_gate` approved that exact product and quantity in this session,
-   and each approval is consumed on use. A later denial revokes a stale approval.
+1. **No `amount` parameter exists on any tool.** The model passes a `product_id` and a `quantity`; the price is looked up from the catalog. It cannot understate a price to slip an item past the gate.
+2. **The cart total is server-side.** It lives on `ShoppingSession`, not in the model's message — which is what defeats the "split one big purchase into several small ones" exploit.
+3. **No order without a fresh, matching gate approval.** `create_order` refuses unless `check_gate` approved that exact product and quantity in this session, and each approval is consumed on use. A later denial revokes a stale approval.
 
-Bounds live in `app/gate.py`: ₹6,000 per item, ₹10,000 per session, 20% max
-discount.
+Bounds live in `app/gate.py`: ₹6,000 per item, ₹10,000 per session, 20% max discount.
 
 ## Margin-aware discounting
 
-Every product carries a real cost. `app/discount.py` bounds any discount by whichever
-is tighter: the store's 20% policy cap, or never selling below cost + 10% margin.
-The cost figure is not in the model's context at any point — it cannot leak what it
-was never given.
+Every product carries a real cost. `app/discount.py` bounds any discount by whichever is tighter: the store's 20% policy cap, or never selling below cost + 10% margin. The cost figure is not in the model's context at any point — it cannot leak what it was never given.
 
 ## Two-sided negotiation
 
-`app/buyer_agent.py` is a second, independent agent with its own hidden budget it
-never states. It opens, the merchant counters using the same margin-aware discount
-logic above, and they go up to three bounded rounds. If the buyer's real ceiling is
-below what the merchant can legally sell at, the merchant holds its price and the
-buyer walks away — same gate and margin rules as a human conversation, no exceptions.
+`app/buyer_agent.py` is a second, independent agent with its own hidden budget it never states. It opens, the merchant counters using the same margin-aware discount logic above, and they go up to three bounded rounds. If the buyer's real ceiling is below what the merchant can legally sell at, the merchant holds its price and the buyer walks away — same gate and margin rules as a human conversation, no exceptions.
 
 ## Revenue attribution
 
-`app/metrics.py` computes one number straight from the audit log — no separate
-analytics pipeline. Across test sessions: ₹1,23,136 realized revenue, ₹941 in margin
-actively protected from bad discounts, 44.7% negotiation close rate (meaning over
-half the time the agent correctly walked away rather than accept a bad deal).
+`app/metrics.py` computes one number straight from the audit log — no separate analytics pipeline. Across test sessions: ₹1,23,136 realized revenue, ₹941 in margin actively protected from bad discounts, 44.7% negotiation close rate (meaning over half the time the agent correctly walked away rather than accept a bad deal).
 
-### The audit trail
+## The audit trail
 
-`app/audit.py` writes one append-only SQLite row per action — including the
-model's own stated reasoning, captured at the moment it requests the tool.
+`app/audit.py` writes one append-only SQLite row per action — including the model's own stated reasoning, captured at the moment it requests the tool.
 
-The UI is a *consumer* of that log, not a parallel account of events:
-`/api/chat` records the highest audit row id before the turn and reads back
-every row written since. So if a product card is on screen, an audit row exists
-that proves the search happened.
-
----
+The UI is a consumer of that log, not a parallel account of events: `/api/chat` records the highest audit row id before the turn and reads back every row written since. So if a product card is on screen, an audit row exists that proves the search happened.
 
 ## Tests
 
@@ -172,10 +143,12 @@ venv/bin/python3 test_watches_prefs.py   # 92 assertions — fully offline
 venv/bin/python3 test_stretch.py         # 84 — webhooks, manifest, buyer agent
 venv/bin/python3 test_e2e.py             # 24 — core tier, real model calls
 venv/bin/python3 test_tier2.py           # 123 — discounts, upsell, refunds
+venv/bin/python3 test_margin.py          # 78 — margin-aware discounting
+venv/bin/python3 test_negotiation.py     # 60 — two-sided negotiation
+venv/bin/python3 test_revenue.py         # 33 — revenue attribution
 ```
 
-`RAZORPAY_MOCK=1` is required: mock orders come back with a `pay_MOCK...` id, so
-the refund and payment-capture paths are exercisable offline.
+`RAZORPAY_MOCK=1` is required: mock orders come back with a `pay_MOCK...` id, so the refund and payment-capture paths are exercisable offline.
 
 ## Other entry points
 
@@ -190,17 +163,8 @@ venv/bin/python3 -c "import sys;sys.path.insert(0,'app');import metrics;print(me
 
 Stated plainly rather than hidden:
 
-- **No authentication.** Every session resolves to one hardcoded `DEMO_CUSTOMER`,
-  so purchase history and preference memory accumulate across all demo runs.
-- **No scheduler.** Price watches are checked by running
-  `app/check_price_watches.py` by hand. The evaluation rule is tested; the cron
-  entry is not built.
-- **No notification transport.** A triggered watch logs and prints; the audit row
-  says `notification_sent: false`.
-- **Subscriptions and Invoices are not built.** Razorpay returns 401 on
-  `/v1/plans` for this account (add-on not activated), so they were deferred
-  rather than written blind. The `subscription.charged` *webhook* path is built
-  and tested — receiving it needs no add-on.
-- **Cross-session refunds of real payments.** A `payment_id` attached via
-  Checkout lives on the in-memory session. Refund it in the same session; a
-  server restart loses the linkage.
+- **No authentication.** Every session resolves to one hardcoded `DEMO_CUSTOMER`, so purchase history and preference memory accumulate across all demo runs.
+- **No scheduler.** Price watches are checked by running `app/check_price_watches.py` by hand. The evaluation rule is tested; the cron entry is not built.
+- **No notification transport.** A triggered watch logs and prints; the audit row says `notification_sent: false`.
+- **Subscriptions and Invoices are not built.** Razorpay returns 401 on `/v1/plans` for this account (add-on not activated), so they were deferred rather than written blind. The `subscription.charged` webhook path is built and tested — receiving it needs no add-on.
+- **Cross-session refunds of real payments.** A `payment_id` attached via Checkout lives on the in-memory session. Refund it in the same session; a server restart loses the linkage.
